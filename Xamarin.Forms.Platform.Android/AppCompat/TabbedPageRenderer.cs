@@ -35,7 +35,10 @@ namespace Xamarin.Forms.Platform.Android.AppCompat
 {
 	public class TabbedPageRenderer : VisualElementRenderer<TabbedPage>,
 #if __ANDROID_29__
-		TabLayout.IOnTabSelectedListener2, 
+#pragma warning disable CS0618 // Type or member is obsolete
+		// TabLayout.IOnTabSelectedListener2 is currently broken with AndroidX
+		TabLayout.IOnTabSelectedListener,
+#pragma warning restore CS0618 // Type or member is obsolete
 #else
 		TabLayout.IOnTabSelectedListener,
 #endif
@@ -501,7 +504,10 @@ namespace Xamarin.Forms.Platform.Android.AppCompat
 				{
 					tabs.SetupWithViewPager(pager);
 					UpdateTabIcons();
+#pragma warning disable CS0618 // Type or member is obsolete
+					// TabLayout.IOnTabSelectedListener2 is currently broken with AndroidX
 					tabs.AddOnTabSelectedListener(this);
+#pragma warning restore CS0618 // Type or member is obsolete
 				}
 
 				UpdateIgnoreContainerAreas();
