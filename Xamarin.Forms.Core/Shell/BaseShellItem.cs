@@ -15,6 +15,10 @@ namespace Xamarin.Forms
 		public event EventHandler Disappearing;
 
 		bool _hasAppearing;
+		Grid _defaultFlyoutItemCell;
+		const string DefaultFlyoutItemLabelStyle = "IMPL_DefaultFlyoutItemLabelStyle";
+		const string DefaultFlyoutItemImageStyle = "IMPL_DefaultFlyoutItemImageStyle";
+		const string DefaultFlyoutItemStyle = "IMPL_DefaultFlyoutItemStyle";
 
 		#region PropertyKeys
 
@@ -256,9 +260,9 @@ namespace Xamarin.Forms
 
 			base.OnStyleClassChanged();
 			List<string> bindableObjectStyle = new List<string>() {
-				"IMPL_DefaultFlyoutItemLabelStyle",
-				"IMPL_DefaultFlyoutItemImageStyle",
-				"IMPL_DefaultFlyoutItemStyle" };
+				DefaultFlyoutItemLabelStyle,
+				DefaultFlyoutItemImageStyle,
+				DefaultFlyoutItemStyle };
 
 			if (StyleClass != null)
 				foreach (var styleClass in StyleClass)
@@ -270,8 +274,6 @@ namespace Xamarin.Forms
 			_defaultFlyoutItemCell.Children.OfType<Image>().First()
 				.StyleClass = bindableObjectStyle;
 		}
-
-		Grid _defaultFlyoutItemCell;
 
 		internal DataTemplate CreateDefaultFlyoutItemCell(string textBinding, string iconBinding)
 		{
@@ -289,7 +291,7 @@ namespace Xamarin.Forms
 					Setters = {
 						new Setter { Property = Label.VerticalTextAlignmentProperty, Value = TextAlignment.Center }
 					},
-					Class = "IMPL_DefaultFlyoutItemLabelStyle",
+					Class = DefaultFlyoutItemLabelStyle,
 				};
 
 				var defaultImageClass = new Style(typeof(Image))
@@ -297,12 +299,12 @@ namespace Xamarin.Forms
 					Setters = {
 						new Setter { Property = Image.VerticalOptionsProperty, Value = LayoutOptions.Center }
 					},
-					Class = "IMPL_DefaultFlyoutItemImageStyle",
+					Class = DefaultFlyoutItemImageStyle,
 				};
 
 				var defaultGridClass = new Style(typeof(Grid))
 				{
-					Class = "IMPL_DefaultFlyoutItemStyle",
+					Class = DefaultFlyoutItemStyle,
 				};
 
 				List<string> bindableObjectStyle = new List<string>() { defaultLabelClass.Class, defaultImageClass.Class, defaultGridClass.Class };
@@ -383,7 +385,6 @@ namespace Xamarin.Forms
 				return grid;
 			});
 		}
-
 	}
 
 	public interface IQueryAttributable
