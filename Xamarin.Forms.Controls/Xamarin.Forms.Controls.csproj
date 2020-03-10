@@ -83,7 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CoreGalleryPages\OSThemesGallery.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="GalleryPages\OSThemesGallery.cs">
       <SubType></SubType>
     </Compile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Xamarin.Forms.Controls.CoreGalleryPages
+namespace Xamarin.Forms.Controls
 {
 	public class OSThemesGallery : ContentPage
 	{
