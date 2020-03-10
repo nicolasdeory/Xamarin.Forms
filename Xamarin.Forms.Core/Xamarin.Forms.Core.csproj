@@ -23,6 +23,9 @@
 	<ItemGroup>
 	  <Folder Include="Xaml\Diagnostics\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+	</ItemGroup>
 	<PropertyGroup>
     <GitInfoReportImportance>high</GitInfoReportImportance>
   </PropertyGroup>

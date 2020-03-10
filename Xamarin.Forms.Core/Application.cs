@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform;
 using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace Xamarin.Forms
 {
@@ -154,6 +155,8 @@ namespace Xamarin.Forms
 				OnPropertyChanged();
 			}
 		}
+
+		public AppTheme RequestedTheme => AppInfo.RequestedTheme;
 
 		public event EventHandler<ModalPoppedEventArgs> ModalPopped;
 
