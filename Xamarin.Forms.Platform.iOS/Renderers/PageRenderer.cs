@@ -358,6 +358,13 @@ namespace Xamarin.Forms.Platform.iOS
 			}
 		}
 
+		public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)
+		{
+			base.TraitCollectionDidChange(previousTraitCollection);
+
+			Element.Resources.Reload();
+		}
+
 		bool ShouldUseSafeArea()
 		{
 			bool usingSafeArea = Page.On<PlatformConfiguration.iOS>().UsingSafeArea();
