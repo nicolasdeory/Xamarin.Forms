@@ -419,7 +419,7 @@ namespace Xamarin.Forms
 #if __IOS__ || __TVOS__
 				if (!IsiOS13OrNewer)
 					return AppTheme.Unspecified;
-
+#if __XCODE11__
 				var uiStyle = GetCurrentUIViewController()?.TraitCollection?.UserInterfaceStyle ??
 					UITraitCollection.CurrentTraitCollection.UserInterfaceStyle;
 
@@ -432,6 +432,7 @@ namespace Xamarin.Forms
 					default:
 						return AppTheme.Unspecified;
 				};
+#endif
 #else
 				return AppTheme.Unspecified;
 #endif
