@@ -432,6 +432,8 @@ namespace Xamarin.Forms
 					default:
 						return AppTheme.Unspecified;
 				};
+#else
+				return AppTheme.Unspecified;
 #endif
 #else
 				return AppTheme.Unspecified;
