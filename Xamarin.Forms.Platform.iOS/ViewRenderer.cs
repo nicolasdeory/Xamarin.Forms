@@ -3,12 +3,12 @@ using System.ComponentModel;
 
 using RectangleF = CoreGraphics.CGRect;
 using SizeF = CoreGraphics.CGSize;
-using UIKit;
 
 #if __MOBILE__
 using NativeColor = UIKit.UIColor;
 using NativeControl = UIKit.UIControl;
 using NativeView = UIKit.UIView;
+using UIKit;
 
 namespace Xamarin.Forms.Platform.iOS
 #else
