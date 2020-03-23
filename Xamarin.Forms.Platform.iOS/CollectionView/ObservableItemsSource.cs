@@ -33,6 +33,8 @@ namespace Xamarin.Forms.Platform.iOS
 			((INotifyCollectionChanged)itemSource).CollectionChanged += CollectionChanged;
 		}
 
+		internal event NotifyCollectionChangedEventHandler CollectionItemsSourceChanged;
+
 		public int Count { get; private set; }
 
 		public object this[int index] => ElementAt(index);
@@ -129,6 +131,8 @@ namespace Xamarin.Forms.Platform.iOS
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+
+			CollectionItemsSourceChanged?.Invoke(this, args);
 		}
 
 		async Task Reload()
