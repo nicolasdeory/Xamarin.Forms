@@ -930,8 +930,6 @@ namespace Xamarin.Forms.Core.UnitTests
 			Assert.AreEqual(section1, shell.CurrentItem.CurrentItem);
 		}
 
-
-
 		[Test]
 		public void FlyoutItemDefaultStylesApplied()
 		{
@@ -949,7 +947,7 @@ namespace Xamarin.Forms.Core.UnitTests
 		}
 
 		[Test]
-		public void FlyoutItemLabelStyle()
+		public void FlyoutItemLabelStyleCanBeChangedAfterRendered()
 		{
 			var classStyle = new Style(typeof(Label))
 			{
@@ -972,6 +970,90 @@ namespace Xamarin.Forms.Core.UnitTests
 			var label = thing.LogicalChildren.OfType<Label>().First();
 			Assert.AreEqual(TextAlignment.Center, label.VerticalTextAlignment);
 			shellItem.StyleClass = new[] { "fooClass" };
+			Assert.AreEqual(TextAlignment.Start, label.VerticalTextAlignment);
+		}
+
+
+		[Test]
+		public void FlyoutItemLabelStyleCustom()
+		{
+			var classStyle = new Style(typeof(Label))
+			{
+				Setters = {
+					new Setter { Property = Label.VerticalTextAlignmentProperty, Value = TextAlignment.Start }
+				},
+				Class = "fooClass",
+			};
+
+			Shell shell = new Shell();
+			shell.Resources = new ResourceDictionary { classStyle };
+			var shellItem = CreateShellItem();
+			shellItem.StyleClass = new[] { "fooClass" };
+
+			shell.Items.Add(shellItem);
+
+			var flyoutItemTemplate = Shell.GetItemTemplate(shellItem);
+			var thing = (Element)flyoutItemTemplate.CreateContent();
+			thing.Parent = shell;
+
+			var label = thing.LogicalChildren.OfType<Label>().First();
+			Assert.AreEqual(TextAlignment.Start, label.VerticalTextAlignment);
+		}
+
+		[Test]
+		public void MenuItemLabelStyleCustom()
+		{
+			var classStyle = new Style(typeof(Label))
+			{
+				Setters = {
+					new Setter { Property = Label.VerticalTextAlignmentProperty, Value = TextAlignment.Start }
+				},
+				Class = "fooClass",
+			};
+
+			Shell shell = new Shell();
+			shell.Resources = new ResourceDictionary { classStyle };
+			var shellItem = CreateShellItem();
+			var menuItem = new MenuItem();
+			var shellMenuItem = new MenuShellItem(menuItem);
+			menuItem.StyleClass = new[] { "fooClass" };
+			shell.Items.Add(shellItem);
+			shell.Items.Add(shellMenuItem);
+
+			var flyoutItemTemplate = Shell.GetItemTemplate(shellMenuItem);
+			var thing = (Element)flyoutItemTemplate.CreateContent();
+			thing.Parent = shell;
+
+			var label = thing.LogicalChildren.OfType<Label>().First();
+			Assert.AreEqual(TextAlignment.Start, label.VerticalTextAlignment);
+		}
+
+		[Test]
+		public void MenuItemLabelStyleCanBeChangedAfterRendered()
+		{
+			var classStyle = new Style(typeof(Label))
+			{
+				Setters = {
+					new Setter { Property = Label.VerticalTextAlignmentProperty, Value = TextAlignment.Start }
+				},
+				Class = "fooClass",
+			};
+
+			Shell shell = new Shell();
+			shell.Resources = new ResourceDictionary { classStyle };
+			var shellItem = CreateShellItem();
+			var menuItem = new MenuItem();
+			var shellMenuItem = new MenuShellItem(menuItem);
+			shell.Items.Add(shellItem);
+			shell.Items.Add(shellMenuItem);
+
+			var flyoutItemTemplate = Shell.GetItemTemplate(shellMenuItem);
+			var thing = (Element)flyoutItemTemplate.CreateContent();
+			thing.Parent = shell;
+
+			var label = thing.LogicalChildren.OfType<Label>().First();
+			Assert.AreEqual(TextAlignment.Center, label.VerticalTextAlignment);
+			menuItem.StyleClass = new[] { "fooClass" };
 			Assert.AreEqual(TextAlignment.Start, label.VerticalTextAlignment);
 		}
 	}
