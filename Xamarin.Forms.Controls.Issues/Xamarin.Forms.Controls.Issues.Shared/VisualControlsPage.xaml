@@ -17,7 +17,7 @@
     <ScrollView>
         <StackLayout Spacing="20" Padding="10">
 
-			<Label Text="Activity Indicators" FontSize="Large" />
+			<!--<Label Text="Activity Indicators" FontSize="Large" />
 
             <Label Text="Default" Margin="0,0,0,-10" />
             <StackLayout Orientation="Horizontal">
@@ -178,7 +178,7 @@
                            TextColor="{StaticResource SecondaryTextColor}" FontSize="14" />
                     <Button Text="more" HorizontalOptions="End" BackgroundColor="{StaticResource PrimaryColor}" />
                 </StackLayout>
-            </Frame>
+            </Frame>-->
 
 
 			<Label Text="Entries" FontSize="Large" />
