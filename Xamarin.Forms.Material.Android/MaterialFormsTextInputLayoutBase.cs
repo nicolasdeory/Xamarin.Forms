@@ -83,15 +83,25 @@ namespace Xamarin.Forms.Material.Android
 				ResetTextColors(formsTextColor, formsPlaceHolderColor);
 			}
 
+#if __ANDROID_29__
+			this.DefaultHintTextColor = _unfocusedEmptyColorList;
+			this.HintTextColor = _unfocusedEmptyColorList;
+			this.BoxStrokeColor = _focusedUnderlineColorsList.GetColorForState(new int[] { global::Android.Resource.Attribute.StateFocused }, global::Android.Graphics.Color.Yellow);
+#else
 			if(HasFocus)
 				ViewCompat.SetBackgroundTintList(EditText, _focusedUnderlineColorsList);
+
 			else
 				ViewCompat.SetBackgroundTintList(EditText, _unfocusedUnderlineColorsList);
-
 			if (HasFocus || !string.IsNullOrWhiteSpace(EditText.Text))
+			{
 				this.DefaultHintTextColor = _focusedFilledColorList;
+			}
 			else
+			{
 				this.DefaultHintTextColor = _unfocusedEmptyColorList;
+			}
+#endif
 		}
 
 		void ApplyTheme() => ApplyTheme(_formsTextColor, _formsPlaceholderColor);
@@ -125,7 +135,7 @@ namespace Xamarin.Forms.Material.Android
 				Hint = hint;
 				// EditText.Hint => Hint
 				// It is impossible to reset it but you can make it invisible.
-				EditText.SetHintTextColor(global::Android.Graphics.Color.Transparent);
+				//EditText.SetHintTextColor(global::Android.Graphics.Color.Transparent);
 			}
 		}
 
